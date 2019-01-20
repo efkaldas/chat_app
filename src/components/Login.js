@@ -2,6 +2,13 @@ import React, { Component } from "react";
 import { Button, FormGroup, TextField } from '@material-ui/core';
 import "./Login.css";
 
+
+class User {
+  constructor(Email, Password) {
+    this.email = Email;
+    this.password = Password;
+  }
+}
 export default class Login extends Component {
   constructor(props) {
     super(props);
@@ -22,11 +29,17 @@ export default class Login extends Component {
     });
   }
 
-  handleSubmit = event => {
-    this.history.pushState(null, 'App');
+  handleSubmit = async event => {
+   // event.preventDefault();
+    //const user = new User(this.state.email,this.state.password);
+    User.email = this.state.email;
+    User.password = this.state.password;
+    this.props.history.push("/chat");
 
-    event.preventDefault();
+
   }
+
+  
 
   render() {
     return (
@@ -39,6 +52,7 @@ export default class Login extends Component {
         label="Email"
         margin="normal"
         variant="outlined"
+        type="email"
         value={this.state.email}
         onChange={this.handleChange}
       />
@@ -48,6 +62,7 @@ export default class Login extends Component {
         id="password"
         label="Password"
         margin="normal"
+        type="password"
         variant="outlined"
         value={this.state.password}
         onChange={this.handleChange}
@@ -65,3 +80,5 @@ export default class Login extends Component {
     );
   }
 }
+
+
