@@ -1,14 +1,9 @@
 import React, { Component } from "react";
 import { Button, FormGroup, TextField } from '@material-ui/core';
 import "./Login.css";
+import User from '../classes/User';
 
 
-class User {
-  constructor(Email, Password) {
-    this.email = Email;
-    this.password = Password;
-  }
-}
 export default class Login extends Component {
   constructor(props) {
     super(props);
@@ -17,6 +12,9 @@ export default class Login extends Component {
       email: "",
       password: ""
     };
+  }
+  isLoged() {
+    return User.isLogedIn();
   }
 
   validateForm() {
@@ -34,9 +32,8 @@ export default class Login extends Component {
     //const user = new User(this.state.email,this.state.password);
     User.email = this.state.email;
     User.password = this.state.password;
+    alert("Welcome!  " + User.getEmail());
     this.props.history.push("/chat");
-
-
   }
 
   

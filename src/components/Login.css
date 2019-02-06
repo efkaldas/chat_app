@@ -8,4 +8,53 @@
       max-width: 320px;
     }
   }
+  @media all and (min-width: 480px) {
+    .Profile {
+      padding: 60px 0;
+    }
+  
+    .Profile form {
+      margin: 0 auto;
+      max-width: 320px;
+    }
+  }
+  
+  ul {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    height: 500px;
+    background-color: aliceblue;
+  }
+
+  div.message {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    text-align: left;
+    background-color: aquamarine;
+    float: left;
+    padding: 0 10px;
+  }
+  div.sender {
+    text-align: left;
+    float: left;
+    padding: 0 10px;
+  }
+  li {
+    list-style-type: none;
+  }
+  div.Row
+{
+    display: table;
+    width: 100%; /*Optional*/
+    table-layout: fixed; /*Optional*/
+    border-spacing: 10px; /*Optional*/
+}
+.float-right {
+  float: right;
+}
+
+
+
   

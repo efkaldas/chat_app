@@ -7,7 +7,6 @@ import Nav_bar from './components/nav_bar';
 import Login from "./components/Login";
 import Routes from "./Routes";
 
-
 class App extends Component {
   render() {
     return (

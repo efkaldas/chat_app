@@ -11,43 +11,67 @@ import Login from './Login';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Route from 'react-router-dom/Route';
 import { Link } from 'react-router-dom';
+import User from '../classes/User';
+import Drawer from '@material-ui/core/Drawer';
+import Divider from '@material-ui/core/Divider';
+import "./Login.css";
+import Grid from '@material-ui/core/Grid';
+import MenuItem from 'material-ui/MenuItem';
 
-const styles = {
-  root: {
-    flexGrow: 1,
-  },
-  grow: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
-};
-
-function ButtonAppBar(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" color="inherit" className={classes.grow}>
-            News
-          </Typography>
-          <Button component={ Link } to="/login" variant="contained" color="primary">
-            Login</Button>
-            <Button component={ Link } to="/" variant="contained" color="primary">
-            Home</Button>
-            <Button component={ Link } to="/chat" variant="contained" color="primary">
-            Chat</Button>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+export default class Navbar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        "open": false,
+        "show": null
+    };
 }
+handleToggle = () => this.setState({open: !this.state.open});
+  
+  render() {
 
-ButtonAppBar.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(ButtonAppBar);
+   const userLinks = (
+      <div className="nav-bar">
+        <Button component={ Link } to="/" variant="contained" color="primary">Home</Button>
+        <Button component={ Link } to="/chat" variant="contained" color="primary">Chat</Button>
+        <Button component={ Link } to="/profile" variant="contained" color="primary">{User.getEmail()}</Button>
+      </div>
+    );
+   const guestLinks = (
+    <div className="nav-bar">
+        <Button className="float-right" className="button" component={ Link } to="/login" variant="contained" color="primary">Login</Button>
+        </div>
+    );
+    return (
+      <div className="nav-bar">                 
+        <div>
+        <AppBar position="static">
+        <Toolbar>
+        <IconButton onClick={this.handleToggle} color="inherit" aria-label="Menu">
+            <MenuIcon />
+          </IconButton>
+        <Grid
+      justify="space-between"
+      container 
+      spacing={24}
+    >
+        <Typography variant="h6" color="inherit" className="nav-bar"></Typography>             
+        <Grid item>
+            { User.isLogedIn() ? userLinks : guestLinks }
+          </Grid>
+          </Grid>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          docked={false}
+          width={200}
+          open={this.state.open}
+          onRequestChange={(open) => this.setState({open})}>
+          <IconButton onClick={this.handleToggle}></IconButton>
+          <h1>Side Bar</h1>
+          </Drawer>
+        </div>
+     </div>
+    )
+  }
+}
